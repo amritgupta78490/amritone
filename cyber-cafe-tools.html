@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="YHssGd_0OMi0ymnob5ePrJDdTa1HpnRElpRpl6wIdj8" />
+    <meta name="google-adsense-account" content="ca-pub-7682804389550520">
+    <meta name="description" content="Online Cyber Cafe tools portal for fast access to utilities like passport photo maker, signature resizer, and biodata maker.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Cafe Tools List | Amrit.one</title>
+    <meta name="keywords" content="Cyber Cafe Tools, Passport Photo Maker, Signature Resizer, Biodata Maker, Online Tools">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/JW18c3z9/file-000000005438720882bf831758153a5c.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/JW18c3z9/file-000000005438720882bf831758153a5c.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7682804389550520" crossorigin="anonymous"></script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "firebase/app": "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js",
+          "firebase/firestore": "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"
+        }
+      }
+    </script>
+ 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Amrit.one",
+      "url": "https://amritone.online",
+      "logo": "https://i.ibb.co/JW18c3z9/file-000000005438720882bf831758153a5c.png"
+    }
+    </script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Poppins', 'sans-serif'],
+                        hand: ['Kalam', 'cursive'] 
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#FDFBF7', navy: '#0F172A', primary: '#1E293B',
+                            accent: '#0EA5E9', surface: '#FFFFFF',
+                            ink: '#0000e6' 
+                        }
+                    },
+                    borderRadius: { 'xl': '1rem', '2xl': '1.5rem', '3xl': '2rem' },
+                    boxShadow: { 
+                        'soft': '0 4px 20px -2px rgba(15, 23, 42, 0.05)', 
+                        'card': '0 10px 40px -10px rgba(0, 0, 0, 0.05)'
+                    },
+                    animation: {
+                        'spin-slow': 'spin 20s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        
+        .fade-in-up { animation: fadeInUp 0.6s ease-out forwards; opacity: 0; transform: translateY(15px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        .ad-banner-container {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.05);
+            aspect-ratio: 16 / 9;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-primary font-sans antialiased min-h-screen flex flex-col relative">
+
+    <main class="flex-grow w-full max-w-md mx-auto flex flex-col justify-start relative z-10 px-4 pt-10 pb-10">
+
+        <section id="results-section" class="mt-4 px-2 pb-20">
+            <div class="flex items-center justify-between mb-6 px-2 fade-in-up">
+                <button onclick="resetToHome()" class="flex items-center gap-2 text-slate-500 hover:text-brand-navy transition-colors">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    <span class="text-sm font-semibold">Home</span>
+                </button>
+                <button onclick="resetToHome()" class="text-xs text-brand-accent font-medium bg-brand-accent/10 px-3 py-1.5 rounded-full hover:bg-brand-accent/20 transition-colors">
+                    Portal Menu
+                </button>
+            </div>
+
+            <div id="dynamic-ad-container" class="hidden w-full mb-6 relative fade-in-up">
+                <div class="ad-banner-container">
+                    <div id="ad-loader" class="absolute inset-0 flex items-center justify-center text-slate-300 z-10">
+                         <i data-lucide="loader-2" class="w-8 h-8 animate-spin"></i>
+                    </div>
+                    <a id="ad-click-link" href="#" target="_blank" class="w-full h-full block">
+                        <img id="ad-display-img" src="" alt="Advertisement" class="w-full h-full object-cover transition-opacity duration-700 opacity-0">
+                    </a>
+                    <span class="absolute top-2 right-2 bg-black/40 backdrop-blur-sm text-white text-[9px] px-2 py-0.5 rounded-full font-bold z-20 uppercase tracking-wider">Ad</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2 mb-4 px-2 fade-in-up">
+                <div class="w-1 h-5 bg-brand-accent rounded-full"></div>
+                <h3 class="text-lg font-bold text-brand-navy">Our Tools</h3>
+            </div>
+
+            <div class="space-y-4 mb-10">
+                
+                <a href="Passport-size-photo.html" class="bg-white p-5 rounded-2xl shadow-soft border border-slate-50 flex items-center gap-4 active:scale-[0.98] transition-transform cursor-pointer fade-in-up block">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-500 shrink-0 shadow-sm">
+                        <i data-lucide="camera" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="font-bold text-brand-primary text-sm">Passport Size Photo</h4>
+                        <p class="text-xs text-slate-400 mt-0.5">Crop & Generate Auto-sized Photos</p>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300 shrink-0"></i>
+                </a>
+
+                <a href="Signature-resizer.html" class="bg-white p-5 rounded-2xl shadow-soft border border-slate-50 flex items-center gap-4 active:scale-[0.98] transition-transform cursor-pointer fade-in-up delay-75 block">
+                    <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-purple-500 shrink-0 shadow-sm">
+                        <i data-lucide="crop" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="font-bold text-brand-primary text-sm">Signature Resizer</h4>
+                        <p class="text-xs text-slate-400 mt-0.5">Resize signatures by KB/Dimension</p>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300 shrink-0"></i>
+                </a>
+
+                <a href="Biodata-maker.html" class="bg-white p-5 rounded-2xl shadow-soft border border-slate-50 flex items-center gap-4 active:scale-[0.98] transition-transform cursor-pointer fade-in-up delay-100 block">
+                    <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-500 shrink-0 shadow-sm">
+                        <i data-lucide="file-text" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="font-bold text-brand-primary text-sm">Biodata Maker</h4>
+                        <p class="text-xs text-slate-400 mt-0.5">Professional templates & formats</p>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-slate-300 shrink-0"></i>
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "firebase/app";
+        import { getFirestore, collection, onSnapshot, query, where, getDocs, doc, getDoc } from "firebase/firestore";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBADp9soMrkd-Ld_OrdSSfU1Kqh3JYh8xc",
+            authDomain: "bihar-sin.firebaseapp.com",
+            projectId: "bihar-sin",
+            storageBucket: "bihar-sin.firebasestorage.app",
+            messagingSenderId: "735677527044",
+            appId: "1:735677527044:web:652614ef88a5cf470b7151"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- FETCH DYNAMIC ADS LOGIC ONLY ---
+        window.activeAdsList = [];
+        let adInterval = null;
+        let currentAdIndex = 0;
+
+        window.fetchAds = async () => {
+            const adContainer = document.getElementById('dynamic-ad-container');
+            const loader = document.getElementById('ad-loader');
+            
+            if (adInterval) clearInterval(adInterval);
+            window.activeAdsList = [];
+            
+            try {
+                const q = query(
+                    collection(db, "artifacts", "bihar-sin-portal", "public", "data", "ads"),
+                    where("isActive", "==", true)
+                );
+
+                const snap = await getDocs(q);
+                
+                const today = new Date().toISOString().split('T')[0];
+                snap.forEach((doc) => {
+                    const data = doc.data();
+                    const start = data.startDate || "0000-00-00";
+                    const end = data.endDate || "9999-12-31";
+                    
+                    if (today >= start && today <= end) {
+                        // Skipping video checking here, just taking image ads
+                        if (!data.videoUrl || !data.videoUrl.includes('youtube')) {
+                            window.activeAdsList.push(data);
+                        }
+                    }
+                });
+
+                if (window.activeAdsList.length > 0 && adContainer) {
+                    adContainer.classList.remove('hidden');
+                    if(loader) loader.classList.add('hidden');
+                    startAdSlideshow();
+                } else if (adContainer) {
+                    adContainer.classList.add('hidden');
+                }
+
+            } catch (err) {
+                console.log("Ad Fetch Error:", err);
+                if(adContainer) adContainer.classList.add('hidden');
+            }
+        };
+
+        window.startAdSlideshow = () => {
+            currentAdIndex = 0;
+            renderAd(currentAdIndex);
+            if (window.activeAdsList.length > 1) {
+                adInterval = setInterval(() => {
+                    currentAdIndex = (currentAdIndex + 1) % window.activeAdsList.length;
+                    renderAd(currentAdIndex);
+                }, 4000); 
+            }
+        };
+
+        window.renderAd = (index) => {
+            const ad = window.activeAdsList[index];
+            const img = document.getElementById('ad-display-img');
+            const link = document.getElementById('ad-click-link');
+            if(img && link) {
+                img.style.opacity = '0';
+                setTimeout(() => {
+                    img.src = ad.mediaUrl;
+                    link.href = ad.targetUrl || "#";
+                    img.onload = () => { img.style.opacity = '1'; };
+                    setTimeout(() => img.style.opacity = '1', 100);
+                }, 350); 
+            }
+        };
+
+        // Initial Load
+        window.onload = function() {
+            lucide.createIcons();
+            if(window.fetchAds) window.fetchAds();
+        };
+    </script>
+
+    <script>
+    function resetToHome() {
+        // Redirecting back to landing page
+        window.location.href = "index.html";
+    }
+    </script>
+</body>
+</html>
