@@ -9,6 +9,8 @@
     <title>Cyber Cafe Tools | Amrit.one</title>
     <meta name="keywords" content="Cyber Cafe Tools, Passport Photo Maker, Signature Resizer, Biodata Maker, Online Tools">
     
+    <link rel="preload" as="image" href="https://i.ibb.co/60QQkL3R/Pngtree-saraswati-devi-black-and-white-14518487.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="icon" type="image/png" href="https://i.ibb.co/JW18c3z9/file-000000005438720882bf831758153a5c.png">
     <link rel="apple-touch-icon" href="https://i.ibb.co/JW18c3z9/file-000000005438720882bf831758153a5c.png">
@@ -94,11 +96,13 @@
     <main class="flex-grow w-full max-w-md mx-auto flex flex-col justify-center relative z-10 px-6 pt-10 pb-10">
 
         <section id="hero-section" class="text-center flex flex-col items-center justify-center min-h-[70vh] fade-in-up">
-            <div class="relative w-400 h-400 mb-6 flex items-center justify-center">
+            <div class="relative w-[300px] h-[300px] mb-6 flex items-center justify-center mx-auto">
                 <div class="absolute inset-0 bg-brand-accent/10 blur-3xl rounded-full"></div>
                 <img src="https://i.ibb.co/60QQkL3R/Pngtree-saraswati-devi-black-and-white-14518487.png" 
                      alt="Amrit Logo" 
-                     class="relative w-full h-300px object-contain drop-shadow-xl animate-float">
+                     loading="eager"
+                     fetchpriority="high"
+                     class="relative w-full h-[300px] object-contain drop-shadow-xl animate-float">
             </div>
 
            <h1 class="text-2xl font-bold text-brand-navy tracking-tight mb-2">
