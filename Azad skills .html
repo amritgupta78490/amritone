@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AZAD SKILL - Learn Skills. Build Future.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. PLAYFUL CARTOON DESIGN SYSTEM VARIABLES & RESETS
+       ========================================================================== */
+    :root {
+      --primary: #2563eb; 
+      --primary-soft: #dbeafe; 
+      --background: #f8fafc; /* Beautiful off-white with sky blue reflections */
+      --surface: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #0f172a; /* Strong cartoon outline */
+      --border-width: 2.5px;
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 32px;
+      --shadow-cartoon: 4px 4px 0px #0f172a;
+      --shadow-cartoon-hover: 7px 7px 0px #0f172a;
+      --shadow-cartoon-press: 2px 2px 0px #0f172a;
+      --transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-top: 80px; /* Offset for curved header */
+      padding-bottom: 90px; /* Offset for curved bottom navigation */
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* ==========================================================================
+       2. REVOLVING BACKGROUND ASHOKA CHAKRA
+       ========================================================================== */
+    .chakra-bg {
+      position: fixed;
+      top: -40px;
+      right: -40px;
+      width: 300px;
+      height: 300px;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.03;
+      animation: spin-slow 30s linear infinite;
+    }
+
+    @keyframes spin-slow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ==========================================================================
+       3. LAYOUT CONTAINER
+       ========================================================================== */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ==========================================================================
+       4. SOLID BOLD ROUNDED HEADER (NON-GLASSMORPHIC)
+       ========================================================================== */
+    header {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      height: 65px;
+      background: var(--surface);
+      border: var(--border-width) solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-cartoon);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0 16px;
+    }
+
+    .logo-zone {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-zone h1 {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .logo-zone p {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       5. REAL-TIME SEARCH WRAPPER
+       ========================================================================== */
+    .search-wrapper {
+      margin: 20px auto;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--surface);
+      border: var(--border-width) solid var(--border-color);
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-cartoon);
+      transition: var(--transition);
+    }
+
+    .search-box:focus-within {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-cartoon-hover);
+    }
+
+    .search-box svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: var(--border-color);
+      stroke-width: 3;
+      margin-right: 12px;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 15px;
+      color: var(--text-main);
+      background: transparent;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       6. BIHAR-SIN IMAGE-ONLY BANNER ADS (CURVED CARTOON STYLE)
+       ========================================================================== */
+    .ad-banner-container {
+      margin-bottom: 24px;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: var(--border-width) solid var(--border-color);
+      box-shadow: var(--shadow-cartoon);
+      aspect-ratio: 16 / 5;
+      position: relative;
+      display: none;
+    }
+
+    .ad-banner-container.active {
+      display: block;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .ad-display-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .ad-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--primary-soft);
+      border: 1.5px solid var(--border-color);
+      color: var(--border-color);
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 50;
+    }
+
+    /* ==========================================================================
+       7. CATEGORIES SCROLLING SECTION
+       ========================================================================== */
+    .section-title {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+
+    .section-title svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 3;
+      stroke: var(--primary);
+    }
+
+    .categories-grid {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .categories-grid::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    .categories-grid::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 10px;
+    }
+
+    .category-card {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: var(--border-width) solid var(--border-color);
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 13.5px;
+      transition: var(--transition);
+      user-select: none;
+      box-shadow: var(--shadow-cartoon);
+    }
+
+    .category-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-cartoon-hover);
+    }
+
+    .category-card.active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      transform: translate(1px, 1px);
+      box-shadow: var(--shadow-cartoon-press);
+    }
+
+    .category-icon-svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    /* ==========================================================================
+       8. COURSE BUBBLE GRID & PORTRAIT 9:16 ASPECT CARDS
+       ========================================================================== */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 Columns on mobile for compact vertical experience */
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .courses-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .courses-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .course-card {
+      background: var(--surface);
+      border: var(--border-width) solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-cartoon);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .course-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: var(--shadow-cartoon-hover);
+    }
+
+    /* Portrait 9:16 Aspect Ratio */
+    .thumbnail-container {
+      position: relative;
+      width: 100%;
+      padding-top: 177.78%; /* 9:16 Aspect Ratio */
+      background-color: var(--primary-soft);
+      overflow: hidden;
+      border-bottom: var(--border-width) solid var(--border-color);
+    }
+
+    .thumbnail-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .course-card:hover .thumbnail-container img {
+      transform: scale(1.04);
+    }
+
+    .course-badges {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 20;
+    }
+
+    .badge {
+      font-size: 9px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1.5px solid var(--border-color);
+      width: fit-content;
+      box-shadow: 2px 2px 0px var(--border-color);
+    }
+
+    .badge-level {
+      background: var(--surface);
+      color: var(--text-main);
+    }
+
+    .badge-category {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .course-content {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .course-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 36px;
+    }
+
+    .course-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .course-meta svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: var(--border-color);
+      stroke-width: 2.5;
+    }
+
+    /* PLAYFUL CARTOON PRIMARY BUTTON */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--primary);
+      color: #ffffff;
+      border: var(--border-width) solid var(--border-color);
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 900;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      box-shadow: 2px 2px 0px var(--border-color);
+      text-transform: uppercase;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px var(--border-color);
+    }
+
+    .btn-primary:active {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0px var(--border-color);
+    }
+
+    /* ==========================================================================
+       9. FULLSCREEN PAGE-LIKE TRANSITION VIEW (COURSE VIEW)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--background); /* Match page background so it feels like navigation */
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(100%); /* Slide horizontally like a mobile view router */
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    .modal-container {
+      background: var(--background);
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      background: var(--surface);
+      border-bottom: var(--border-width) solid var(--border-color);
+      height: 65px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      position: sticky;
+      top: 0;
+      z-index: 2200;
+    }
+
+    .modal-close-btn {
+      background: var(--surface);
+      border: var(--border-width) solid var(--border-color);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-main);
+      transition: var(--transition);
+      box-shadow: 2px 2px 0px var(--border-color);
+    }
+
+    .modal-close-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px var(--border-color);
+    }
+
+    .modal-close-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--text-main);
+      stroke-width: 3;
+    }
+
+    .modal-nav-title {
+      margin-left: 16px;
+      font-size: 16px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    /* 9:16 aspect vertical players inside the new details view */
+    .player-outer-wrapper {
+      max-width: 480px;
+      width: 100%;
+      margin: 20px auto 0 auto;
+      padding: 0 16px;
+    }
+
+    .video-section {
+      width: 100%;
+      background: #000000;
+      position: relative;
+      padding-top: 177.78%; /* Strictly 9:16 Vertical Video ratio */
+      border: var(--border-width) solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-cartoon);
+      overflow: hidden;
+    }
+
+    .video-section iframe,
+    .video-section video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .modal-body {
+      max-width: 480px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 16px 80px 16px;
+    }
+
+    .modal-header-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .modal-badges {
+      display: flex;
+      gap: 8px;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .modal-meta-row {
+      display: flex;
+      gap: 20px;
+      padding: 12px 0;
+      border-top: var(--border-width) dashed var(--border-color);
+      border-bottom: var(--border-width) dashed var(--border-color);
+      margin-bottom: 18px;
+    }
+
+    .modal-desc-title {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .modal-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       10. CARTOONISH BOTTOM NAVIGATION BAR
+       ========================================================================== */
+    .bottom-nav {
+      position: fixed;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      height: 65px;
+      background: var(--surface);
+      border: var(--border-width) solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-cartoon);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+    }
+
+    .nav-item svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--text-muted);
+      stroke-width: 2.5;
+      fill: none;
+      margin-bottom: 2px;
+      transition: var(--transition);
+    }
+
+    .nav-item:hover {
+      color: var(--primary);
+    }
+
+    .nav-item:hover svg {
+      stroke: var(--primary);
+    }
+
+    .nav-item.active {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .nav-item.active svg {
+      stroke: var(--primary);
+      stroke-width: 3;
+    }
+
+    /* ==========================================================================
+       11. LOADER, ERROR & STATUSES
+       ========================================================================== */
+    .spinner-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 0;
+      width: 100%;
+    }
+
+    .spinner {
+      width: 38px;
+      height: 38px;
+      border: 4px solid var(--primary-soft);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 12px;
+    }
+
+    .status-state {
+      text-align: center;
+      padding: 40px 20px;
+      width: 100%;
+    }
+
+    .status-state svg {
+      width: 48px;
+      height: 48px;
+      stroke: var(--border-color);
+      stroke-width: 2.5;
+      margin-bottom: 12px;
+      fill: none;
+    }
+
+    .status-state h4 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .status-state p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .error-banner {
+      background: #fef2f2;
+      border: var(--border-width) solid var(--border-color);
+      color: #991b1b;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+      font-size: 13.5px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow-cartoon);
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .error-banner svg {
+      stroke: #991b1b;
+      stroke-width: 3;
+    }
+
+    /* ==========================================================================
+       12. ANIMATIONS
+       ========================================================================== */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9) translateY(10px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <img src="https://i.ibb.co/NdNntcXc/ashok-chakra-e1426766122112.png" alt="Ashoka Chakra Background" class="chakra-bg">
+
+  <header>
+    <div class="container header-content">
+      <div class="logo-zone">
+        <h1>AZAD SKILL</h1>
+        <p>Learn Skills. Build Future.</p>
+      </div>
+    </div>
+    
+    <div id="authArea">
+  <button class="btn-primary" onclick="loginWithGoogle()">
+  Login
+</button>
+</div>
+    
+  </header>
+
+  <main class="container">
+    
+    <div class="search-wrapper">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input type="text" id="searchInput" placeholder="Search title, details or tags..." autocomplete="off">
+      </div>
+    </div>
+
+    <div class="ad-banner-container" id="adBannerUnit">
+      <span class="ad-tag">Ad</span>
+      <a id="adClickLink" href="#" target="_blank">
+        <img id="adDisplayImg" src="" alt="Campaign Campaign" class="ad-display-img">
+      </a>
+    </div>
+
+    <div id="errorContainer"></div>
+
+    <section style="padding-top: 5px; padding-bottom: 10px;">
+      <h3 class="section-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6H20M4 12H20M4 18H20" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Categories
+      </h3>
+      <div class="categories-grid" id="categoriesContainer">
+        </div>
+    </section>
+
+    <section style="padding-top: 10px; padding-bottom: 20px;">
+      <h3 class="section-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Popular Tracks
+      </h3>
+      <div id="coursesStatusContainer"></div>
+      <div class="courses-grid" id="coursesContainer">
+        </div>
+    </section>
+
+  </main>
+
+  <div class="modal-overlay" id="courseModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <button class="modal-close-btn" onclick="closeCourseModal()" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span class="modal-nav-title" id="modalHeaderTitle">Back to Classroom</span>
+      </div>
+      
+      <div class="player-outer-wrapper">
+        <div class="video-section" id="modalVideoSection">
+          </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-header-info">
+          <div class="modal-badges">
+            <span class="badge badge-category" id="modalCategoryBadge">Category</span>
+            <span class="badge badge-level" id="modalLevelBadge">Level</span>
+          </div>
+          <h2 class="modal-title" id="modalTitle">Course Detail</h2>
+        </div>
+
+        <div class="modal-meta-row">
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span id="modalDuration">0 Minutes</span>
+          </div>
+        </div>
+
+        <h4 class="modal-desc-title">Study Plan</h4>
+        <p class="modal-desc" id="modalDescription">Dynamic curriculum tracks loading details.</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <div class="nav-item active" onclick="location.reload()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3m10-11v11a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Home
+    </div>
+    <div class="nav-item" onclick="window.filterCourses('all')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Programs
+    </div>
+    <div class="nav-item" onclick="window.openAboutDialog()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      About
+    </div>
+  </nav>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy, where } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+  import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+    // Scope cache drivers
+    let dbAzad;
+    let dbBiharSin;
+    let localCategories = [];
+    let localCourses = [];
+    let activeCategoryId = 'all';
+    let currentSearchQuery = '';
+    let adsList = [];
+    let adIndex = 0;
+    let adInterval = null;
+  let auth;
+let currentUser = null;
+
+    // Azad Skill Platform Configuration
+    const firebaseConfigAzad = {
+      apiKey: "AIzaSyDyeQAYlc2h7vX8Z_9FZn4MquIKshwWWyk",
+      authDomain: "azad-skill.firebaseapp.com",
+      projectId: "azad-skill",
+      storageBucket: "azad-skill.firebasestorage.app",
+      messagingSenderId: "465099025771",
+      appId: "1:465099025771:web:7dec7d1c2b763df7a6302e",
+      measurementId: "G-DWXGCCER27"
+    };
+
+    // Bihar Sin Dynamic Ad Delivery System Configuration
+    const firebaseConfigBiharSin = {
+      apiKey: "AIzaSyBADp9soMrkd-Ld_OrdSSfU1Kqh3JYh8xc",
+      authDomain: "bihar-sin.firebaseapp.com",
+      projectId: "bihar-sin",
+      storageBucket: "bihar-sin.firebasestorage.app",
+      messagingSenderId: "735677527044",
+      appId: "1:735677527044:web:652614ef88a5cf470b7151"
+    };
+
+    /**
+     * Initializes structural pipeline connections
+     */
+    async function initApp() {
+        
+      initializeFirebase();
+      setupAuth();
+      setupSearchBinds();
+      
+      showLoading('categories');
+      showLoading('courses');
+
+      try {
+        await Promise.all([
+          loadCategories(),
+          loadCourses(),
+          fetchBannerAds()
+        ]);
+      } catch (err) {
+        console.error("Connectivity Exception: ", err);
+        showError("Local databases parsing failure. Verify connection integrity.");
+        hideLoading('categories');
+        hideLoading('courses');
+        return;
+      }
+
+      renderCategories();
+      renderCourses();
+    }
+
+    /**
+     * Set up Dual firestore links
+     */
+    function initializeFirebase() {
+      try {
+        const appAzad = initializeApp(firebaseConfigAzad, "azadSkillApp");
+        dbAzad = getFirestore(appAzad);
+         auth = getAuth(appAzad);
+console.log("Auth Ready:", auth);
+        const appBihar = initializeApp(firebaseConfigBiharSin, "biharSinApp");
+        dbBiharSin = getFirestore(appBihar);
+      } catch (error) {
+        console.error("Failure preparing multi-firebase client setup: ", error);
+        showError("Initialization error.");
+      }
+    }
+
+    /**
+     * Dynamically load category data
+     */
+    async function loadCategories() {
+      try {
+        const categoriesRef = collection(dbAzad, "categories");
+        const q = query(categoriesRef, orderBy("order", "asc"));
+        const querySnapshot = await getDocs(q);
+        
+        localCategories = [];
+        querySnapshot.forEach((doc) => {
+          localCategories.push({ id: doc.id, ...doc.data() });
+        });
+      } catch (error) {
+        console.error("Categories fetch failed: ", error);
+        throw error;
+      }
+    }
+
+    /**
+     * Dynamically load course tracks
+     */
+    async function loadCourses() {
+      try {
+        const coursesRef = collection(dbAzad, "courses");
+        const q = query(coursesRef, orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        localCourses = [];
+        querySnapshot.forEach((doc) => {
+          localCourses.push({ id: doc.id, ...doc.data() });
+        });
+      } catch (error) {
+        console.error("Courses fetch failed: ", error);
+        throw error;
+      }
+    }
+
+    /**
+     * Banner advertisement extraction directly mapped from the Bihar Sin project
+     */
+    async function fetchBannerAds() {
+      try {
+        const adsCollection = collection(dbBiharSin, "artifacts", "bihar-sin-portal", "public", "data", "ads");
+        const q = query(adsCollection, where("isActive", "==", true));
+        const querySnapshot = await getDocs(q);
+        
+        adsList = [];
+        const todayStr = new Date().toISOString().split('T')[0];
+
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const start = data.startDate || "0000-00-00";
+          const end = data.endDate || "9999-12-31";
+          
+          // Image-only campaigns: Ensure there is mediaUrl and NO videoUrl
+          if (todayStr >= start && todayStr <= end && data.mediaUrl && !data.videoUrl) {
+            adsList.push(data);
+          }
+        });
+
+        if (adsList.length > 0) {
+          startAdRotation();
+        }
+      } catch (error) {
+        console.warn("Bihar-sin integration bypass: ", error);
+      }
+    }
+
+    /**
+     * Slideshow state controller
+     */
+    function startAdRotation() {
+      const bannerContainer = document.getElementById('adBannerUnit');
+      if (!bannerContainer) return;
+
+      bannerContainer.classList.add('active');
+      renderAd(adIndex);
+
+      if (adsList.length > 1) {
+        adInterval = setInterval(() => {
+          adIndex = (adIndex + 1) % adsList.length;
+          renderAd(adIndex);
+        }, 4500);
+      }
+    }
+
+    /**
+     * Performs campaign frame transitions
+     */
+    function renderAd(index) {
+      const img = document.getElementById('adDisplayImg');
+      const link = document.getElementById('adClickLink');
+      if (!img || !link) return;
+
+      const campaign = adsList[index];
+      img.style.opacity = '0';
+
+      setTimeout(() => {
+        img.src = campaign.mediaUrl;
+        link.href = campaign.targetUrl || "#";
+        img.onload = () => {
+          img.style.opacity = '1';
+        };
+      }, 300);
+    }
+
+    /**
+     * Standard Dynamic SVG Library Map
+     */
+    function getCategorySVG(name) {
+      const iconName = (name || '').toLowerCase();
+      
+      // Development categories
+      if (iconName.includes('web') || iconName.includes('dev') || iconName.includes('code') || iconName.includes('tech')) {
+        return `<svg class="category-icon-svg" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      }
+      // Design / Arts
+      if (iconName.includes('design') || iconName.includes('creative') || iconName.includes('art') || iconName.includes('ui')) {
+        return `<svg class="category-icon-svg" viewBox="0 0 24 24"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M12 6V12L16 14" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      }
+      // Marketing / Business
+      if (iconName.includes('market') || iconName.includes('business') || iconName.includes('finance') || iconName.includes('seo')) {
+        return `<svg class="category-icon-svg" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      }
+      
+      // Fallback Book SVG Icon
+      return `<svg class="category-icon-svg" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    }
+
+    /**
+     * Dynamic rendering category chips
+     */
+    function renderCategories() {
+      const container = document.getElementById('categoriesContainer');
+      if (!container) return;
+
+      const allActive = activeCategoryId === 'all' ? 'active' : '';
+      let htmlContent = `
+        <div class="category-card ${allActive}" onclick="window.filterCourses('all')">
+          <svg class="category-icon-svg" viewBox="0 0 24 24"><path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>All Programs</span>
+        </div>
+      `;
+
+      localCategories.forEach(cat => {
+        const isActive = activeCategoryId === cat.id ? 'active' : '';
+        const customSVG = getCategorySVG(cat.name);
+        htmlContent += `
+          <div class="category-card ${isActive}" onclick="window.filterCourses('${cat.id}')">
+            ${customSVG}
+            <span>${cat.name || 'Unnamed'}</span>
+          </div>
+        `;
+      });
+
+      container.innerHTML = htmlContent;
+    }
+
+    /**
+     * Dynamic rendering course lists (Portrait-first vertical format)
+     */
+    function renderCourses() {
+      const container = document.getElementById('coursesContainer');
+      const statusContainer = document.getElementById('coursesStatusContainer');
+      if (!container || !statusContainer) return;
+
+      let filtered = localCourses.filter(course => {
+        const matchesCategory = (activeCategoryId === 'all' || course.categoryId === activeCategoryId);
+        
+        const searchLower = currentSearchQuery.toLowerCase();
+        const catName = getCategoryName(course.categoryId).toLowerCase();
+        const matchesSearch = !currentSearchQuery || 
+          (course.title && course.title.toLowerCase().includes(searchLower)) ||
+          (course.description && course.description.toLowerCase().includes(searchLower)) ||
+          catName.includes(searchLower);
+
+        return matchesCategory && matchesSearch;
+      });
+
+      if (localCourses.length === 0) {
+        container.innerHTML = '';
+        statusContainer.innerHTML = `
+          <div class="status-state">
+            <svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h4>No courses found</h4>
+            <p>We are currently uploading new learning materials.</p>
+          </div>`;
+        return;
+      }
+
+      if (filtered.length === 0 && currentSearchQuery) {
+        container.innerHTML = '';
+        statusContainer.innerHTML = `
+          <div class="status-state">
+            <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h4>No matching tracks found</h4>
+            <p>Try matching keywords or rephrasing query parameters.</p>
+          </div>`;
+        return;
+      }
+
+      statusContainer.innerHTML = '';
+
+      let htmlContent = '';
+      filtered.forEach(course => {
+        const categoryName = getCategoryName(course.categoryId);
+        const placeholderImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 711' style='background:%23dbeafe'%3E%3C/svg%3E";
+
+        htmlContent += `
+          <div class="course-card">
+            <div class="thumbnail-container">
+              <img src="${course.thumbnail || placeholderImg}" alt="${course.title || 'Course Cover'}" onerror="this.src='${placeholderImg}'">
+              <div class="course-badges">
+                <span class="badge badge-category">${categoryName}</span>
+                <span class="badge badge-level">${course.level || 'General'}</span>
+              </div>
+            </div>
+            <div class="course-content">
+              <h4 class="course-title">${course.title || 'Untitled'}</h4>
+              
+              <div class="course-meta">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>${course.duration || 'Flexible'}</span>
+              </div>
+
+              <button class="btn-primary" onclick="window.openCourseModal('${course.id}')">
+                <span>Join Program</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = htmlContent;
+    }
+
+    /**
+     * Apply dynamic active categories filters
+     */
+    function filterCourses(categoryId) {
+      activeCategoryId = categoryId;
+      renderCategories();
+      renderCourses();
+    }
+
+    /**
+     * Configures search bindings
+     */
+    function setupSearchBinds() {
+      const searchInput = document.getElementById('searchInput');
+      if (!searchInput) return;
+      searchInput.addEventListener('input', (e) => {
+        searchCourses(e.target.value);
+      });
+    }
+
+    function searchCourses(queryText) {
+      currentSearchQuery = queryText;
+      renderCourses();
+    }
+
+    function getCategoryName(categoryId) {
+      if (!categoryId) return 'General';
+      const catObj = localCategories.find(c => c.id === categoryId);
+      return catObj ? catObj.name : 'General';
+    }
+
+    /**
+     * Resolves stream types (UPDATED: Added support for YouTube Shorts)
+     */
+    function parseVideoUrl(url) {
+      if (!url) return { type: 'unknown', url: '' };
+      
+      // Update regex to detect 'shorts/' links as well
+      const ytRegex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
+      const match = url.match(ytRegex);
+      
+      if (match && match[2].length === 11) {
+        return {
+          type: 'youtube',
+          id: match[2],
+          embedUrl: `https://www.youtube.com/embed/${match[2]}?autoplay=1&rel=0`
+        };
+      }
+      
+      return {
+        type: 'mp4',
+        url: url
+      };
+    }
+
+    /**
+     * Transitions fullscreen to display dynamic detail paths (Simulated sub-page router)
+     */
+    function openCourseModal(courseId) {
+      if(!currentUser){
+  showError("Please login first");
+  return;
+}
+      const course = localCourses.find(c => c.id === courseId);
+      if (!course) {
+        showError("Requested course records offline.");
+        return;
+      }
+
+      const modal = document.getElementById('courseModal');
+      const videoSection = document.getElementById('modalVideoSection');
+      
+      // Update Detail UI Tags
+      document.getElementById('modalHeaderTitle').innerText = `${course.title || 'Course Details'}`;
+      document.getElementById('modalTitle').innerText = course.title || 'Untitled';
+      document.getElementById('modalCategoryBadge').innerText = getCategoryName(course.categoryId);
+      document.getElementById('modalLevelBadge').innerText = course.level || 'General';
+      document.getElementById('modalDuration').innerText = course.duration || 'Flexible duration';
+      document.getElementById('modalDescription').innerText = course.description || '';
+
+      // UPDATED: Check multiple possible database keys incase name changes in firestore
+      const activeVideoUrl = course.videoUrl || course.video || course.url || course.link;
+      const videoData = parseVideoUrl(activeVideoUrl);
+      
+      if (videoData.type === 'youtube') {
+        videoSection.innerHTML = `<iframe src="${videoData.embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      } else if (videoData.type === 'mp4') {
+        // UPDATED: Added 'muted' attribute. Modern browsers block autoplay without it.
+        videoSection.innerHTML = `
+          <video controls autoplay muted playsinline style="width:100%; height:100%;">
+            <source src="${videoData.url}" type="video/mp4">
+            Dynamic codec video playbacks are not supported on your browser system.
+          </video>`;
+      } else {
+        videoSection.innerHTML = `<div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:#ffffff; font-size:13px; font-weight:700; text-align:center; width:80%;">No playable vertical media stream configurations mapped to this record.</div>`;
+      }
+
+      // Smooth horizontal viewport page overlay transition
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    /**
+     * Safely terminates dynamic media players and returns to home list
+     */
+    function closeCourseModal() {
+      const modal = document.getElementById('courseModal');
+      const videoSection = document.getElementById('modalVideoSection');
+      
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      
+      // Clear player to immediately mute active audio output streams
+      videoSection.innerHTML = '';
+    }
+
+    /**
+     * Opens dynamic information dialog about the program
+     */
+    function openAboutDialog() {
+      showError("AZAD SKILL © 2026. Empowering career excellence through highly streamlined vertical learning tracks.");
+    }
+
+    /**
+     * Sets Dynamic Spinner Markup
+     */
+    function showLoading(target) {
+      const id = target === 'categories' ? 'categoriesContainer' : 'coursesContainer';
+      const element = document.getElementById(id);
+      if (element) {
+        element.innerHTML = `
+          <div class="spinner-container">
+            <div class="spinner"></div>
+            <p style="font-size:11px; color:var(--text-muted); font-weight:800; text-transform:uppercase;">Loading dynamic pipeline...</p>
+          </div>`;
+      }
+    }
+
+    function hideLoading(target) {
+      // Clean dynamic callback overrides in async sequences
+    }
+
+    /**
+     * System banner error updates
+     */
+    function showError(message) {
+      const container = document.getElementById('errorContainer');
+      if (!container) return;
+      
+      container.innerHTML = `
+        <div class="error-banner">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>${message}</span>
+        </div>`;
+      
+      setTimeout(() => {
+        container.innerHTML = '';
+      }, 7000);
+    }
+
+    // Set Window scope functions for inline DOM click events
+    window.filterCourses = filterCourses;
+    window.openCourseModal = openCourseModal;
+    window.closeCourseModal = closeCourseModal;
+    window.openAboutDialog = openAboutDialog;
+
+    
+    
+  //login system
+  
+  async function loginWithGoogle() {
+  try {
+    const provider = new GoogleAuthProvider();
+    await signInWithRedirect(auth, provider);
+  } catch (err) {
+    console.error(err);
+    showError("Login failed");
+  }
+}
+  // logout system
+  async function logoutUser() {
+  try {
+    await signOut(auth);
+  } catch (err) {
+    console.error(err);
+  }
+}
+  //User State Listener
+  function setupAuth() {
+    
+getRedirectResult(auth)
+  .then((result) => {
+    if (result?.user) {
+      console.log("Login Success:", result.user.displayName);
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+    
+  onAuthStateChanged(auth, (user) => {
+
+  console.log("Auth User:", user);
+
+  const authArea = document.getElementById("authArea");
+
+  if(user){
+
+    alert("Login Success: " + user.displayName);
+
+    currentUser = user;
+
+    authArea.innerHTML = `
+      <div style="display:flex;align-items:center;gap:8px;">
+        <img
+          src="${user.photoURL}"
+          style="width:40px;height:40px;border-radius:50%;border:2px solid #000;">
+          
+        <button class="btn-primary" onclick="logoutUser()">
+          Logout
+        </button>
+      </div>
+    `;
+
+  } else {
+
+    currentUser = null;
+
+    authArea.innerHTML = `
+      <button class="btn-primary" onclick="loginWithGoogle()">
+        Login
+      </button>
+    `;
+  }
+
+});
+  }
+  window.loginWithGoogle = loginWithGoogle;
+window.logoutUser = logoutUser;
+  
+  window.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
